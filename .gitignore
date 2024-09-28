@@ -1,0 +1,42 @@
+/rule-evaluator-service/gradle/
+
+/rule-evaluator-service/HELP.md
+/rule-evaluator-service/.gradle
+/rule-evaluator-service/build/
+/rule-evaluator-service/!gradle/wrapper/gradle-wrapper.jar
+/rule-evaluator-service/!**/src/main/**/build/
+/rule-evaluator-service/!**/src/test/**/build/
+
+### STS ###
+/rule-evaluator-service/.apt_generated
+/rule-evaluator-service/.classpath
+/rule-evaluator-service/.factorypath
+/rule-evaluator-service/.project
+/rule-evaluator-service/.settings
+/rule-evaluator-service/.springBeans
+/rule-evaluator-service/.sts4-cache
+/rule-evaluator-service/bin/
+/rule-evaluator-service/!**/src/main/**/bin/
+/rule-evaluator-service/!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+/rule-evaluator-service/.idea
+/rule-evaluator-service/*.iws
+/rule-evaluator-service/*.iml
+/rule-evaluator-service/*.ipr
+/rule-evaluator-service/out/
+/rule-evaluator-service/!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Kotlin ###
+.kotlin
