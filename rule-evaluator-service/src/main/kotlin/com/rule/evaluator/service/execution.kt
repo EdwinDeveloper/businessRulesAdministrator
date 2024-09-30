@@ -1,6 +1,6 @@
 package com.rule.evaluator.service
 
-import com.rule.evaluator.common.InputRequest
+import com.rule.evaluator.common.request.InputRequest
 import org.springframework.stereotype.Service
 
 @Service
