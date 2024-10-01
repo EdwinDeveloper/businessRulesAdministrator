@@ -1,12 +1,10 @@
 package com.rule.evaluator.service
 
 import com.rule.evaluator.common.response.RuleAdminResponse
-import com.rule.evaluator.common.Task
 import com.rule.evaluator.common.enums.TypeFlow
 import com.rule.evaluator.common.request.InputRequest
 import com.rule.evaluator.common.request.RuleAdminRequest
 import com.rule.evaluator.manager.RuleAdminManager
-import com.rule.evaluator.service.processor.FlowProcessor
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -21,21 +19,20 @@ class RulesFlowMapper {
 
     fun getRules(
         inputRequest: InputRequest
-    ): Double <FlowProcessor,  RuleAdminResponse>{
+    ): RuleAdminResponse{
         val ruleAdminResponse = try {
             ruleStoreManager.getRules(
                 RuleAdminRequest(
-                task = inputRequest.task,
-                user = inputRequest.user,
-                traceabilityId = inputRequest.traceabilityId
-            )
+                    task = inputRequest.task,
+                    user = inputRequest.user,
+                    traceabilityId = inputRequest.traceabilityId
+                )
             )
         } catch (ex: Exception) {
             RuleAdminResponse(rules = ArrayList(), runType = TypeFlow.LINEAL, userId = inputRequest.user)
         }
-
         ruleAdminResponse.rules.sortedBy { it.priority }
-        return Double (null, ruleAdminResponse)
+        return  ruleAdminResponse
     }
 
 }
