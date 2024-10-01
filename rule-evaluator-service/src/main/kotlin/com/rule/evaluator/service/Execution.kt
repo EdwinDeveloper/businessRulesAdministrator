@@ -20,5 +20,6 @@ class Execution {
         logger.info("RULE-VALIDATOR-SERVICE -- running -- getFlows [{}] [{}]", flow::class.java.simpleName, inputRequest.traceabilityId)
 
 
+        return null
     }
 }

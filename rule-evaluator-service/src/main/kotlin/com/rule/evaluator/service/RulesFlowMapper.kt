@@ -6,6 +6,7 @@ import com.rule.evaluator.common.enums.TypeFlow
 import com.rule.evaluator.common.request.InputRequest
 import com.rule.evaluator.common.request.RuleAdminRequest
 import com.rule.evaluator.manager.RuleAdminManager
+import com.rule.evaluator.service.processor.FlowProcessor
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -20,7 +21,7 @@ class RulesFlowMapper {
 
     fun getRules(
         inputRequest: InputRequest
-    ): RuleAdminResponse{
+    ): Double <FlowProcessor,  RuleAdminResponse>{
         val ruleAdminResponse = try {
             ruleStoreManager.getRules(
                 RuleAdminRequest(
@@ -34,7 +35,7 @@ class RulesFlowMapper {
         }
 
         ruleAdminResponse.rules.sortedBy { it.priority }
-        return ruleAdminResponse
+        return Double (null, ruleAdminResponse)
     }
 
 }
