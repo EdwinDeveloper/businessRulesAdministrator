@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class InputRequest (
     val task: String? = null,
+    val user: String,
     var input: MutableMap<String, Any>,
     val traceabilityId: String
 )

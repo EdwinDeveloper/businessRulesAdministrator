@@ -11,5 +11,5 @@ import org.springframework.cloud.openfeign.FeignClient
 interface RuleAdminClient {
 
     @PostMapping("/flow")
-    fun getEvents(@RequestBody ruleAdminRequest: RuleAdminRequest): RuleAdminResponse
+    fun getRules(@RequestBody ruleAdminRequest: RuleAdminRequest): RuleAdminResponse
 }
