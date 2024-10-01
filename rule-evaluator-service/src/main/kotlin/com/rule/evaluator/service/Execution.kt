@@ -30,7 +30,7 @@ class Execution {
         val runEntity = RunEntity(
             input = inputRequest.toJsonString(),
             traceabilityId = inputRequest.traceabilityId,
-            userId = UUID.fromString(inputRequest.input.getOrDefault("user_id", "00000000-0000-0000-0000-000000000000") as String?),
+            userId = UUID.fromString(inputRequest.user),
             response = null,
             createdAt = LocalDateTime.now(),
             ruleId = null,
@@ -38,7 +38,7 @@ class Execution {
         )
         val runSaved = runRepository.save(runEntity)
 
-        val response = flow.processFlow(inputRequest.task, inputRequest.input, runSaved, flow.second, flow.third.runType)
+        val response = 2 //flow.processFlow(inputRequest.task, inputRequest.input, runSaved, flow.second, flow.third.runType)
         val responseString = response.toJsonString()
         logger.info("RULE-VALIDATOR-SERVICE -- running -- result [{}]", responseString)
         return response

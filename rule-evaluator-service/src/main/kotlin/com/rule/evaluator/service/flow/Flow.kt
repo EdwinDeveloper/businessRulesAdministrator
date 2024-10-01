@@ -9,26 +9,25 @@ import com.rule.evaluator.util.toJsonString
 import org.slf4j.LoggerFactory
 import java.util.*
 
-abstract class Flow<PROCESS_DATA, DATA, OUTPUT_DATA>: FlowProcessor {
+abstract class Flow<PROCESS_DATA, OUTPUT_DATA>: FlowProcessor {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
-    protected abstract fun getInformation(flow: String, inputData: Map<String, Any>, traceabilityId: UUID): PROCESS_DATA
-    protected abstract fun completeValuation(requestData: Map<String, Any>, runEntity: RunEntity, rules: List<Rules>, runType: TypeFlow): OUTPUT_DATA
+    protected abstract fun getExternalInfo(inputRequest: InputRequest): PROCESS_DATA
+    protected abstract fun completeEvaluation(requestData: Map<String, Any>, runEntity: RunEntity, rules: List<Rules>, runType: TypeFlow): OUTPUT_DATA
 
     override fun processFlow(
         inputRequest: InputRequest,
-        requestData: Map<String, Any>,
         runEntity: RunEntity,
         rules: List<Rules>,
         runType: TypeFlow
     ): Any {
 
-        val processData = this.getInformation( runEntity.flow ,requestData, runEntity.traceabilityId ?: UUID.randomUUID())
+        val dataToEvaluate = this.getExternalInfo( inputRequest )
         logger.info("RULE VALIDATOR -- running -- [{}]", runEntity.traceabilityId)
 
-        val response = this.completeValuation(requestData, runEntity, rules, runType)
-        logger.info("RULE ENGINE -- execute -- takeDecision [{}]", response.toJsonString())
+        val responseEvaluation = this.completeEvaluation(inputRequest.input, runEntity, rules, runType)
+        logger.info("RULE ENGINE -- running -- evaluation [{}]", responseEvaluation.toJsonString())
 
-        return response as Any
+        return responseEvaluation as Any
     }
 }

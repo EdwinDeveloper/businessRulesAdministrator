@@ -7,5 +7,10 @@ import com.rule.evaluator.entity.RunEntity
 import java.util.*
 
 interface FlowProcessor {
-    fun processFlow(inputRequest: InputRequest, requestData: Map<String, Any>, runEntity: RunEntity, rules: List<Rules>, runType: TypeFlow): Any
+    fun processFlow(
+        inputRequest: InputRequest,
+        runEntity: RunEntity,
+        rules: List<Rules>,
+        runType: TypeFlow
+    ): Any
 }
