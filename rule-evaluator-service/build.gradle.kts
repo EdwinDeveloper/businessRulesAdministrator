@@ -30,6 +30,7 @@ dependencies {
 	implementation ("org.springframework.retry:spring-retry:1.3.4")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+	implementation("org.mvel:mvel2:2.4.7.Final")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
