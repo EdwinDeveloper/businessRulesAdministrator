@@ -40,3 +40,6 @@
 
 ### Kotlin ###
 .kotlin
+
+/rule-dash-service/node_modules/
+/rule-dash-service/package-lock.json
