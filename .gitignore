@@ -43,3 +43,9 @@
 
 /rule-dash-service/node_modules/
 /rule-dash-service/package-lock.json
+
+/rule-administrator-service/.mvn
+/rule-administrator-service/mvnw
+/rule-administrator-service/mvnw.cmd
+/rule-administrator-service/.gitignore
+/rule-administrator-service/.DS_Store
