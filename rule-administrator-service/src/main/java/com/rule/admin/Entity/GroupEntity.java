@@ -1,6 +1,6 @@
 package com.rule.admin.Entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -19,7 +19,7 @@ public class GroupEntity {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "flow_rule",
+            name = "group_rule",
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "rule_id")
     )
