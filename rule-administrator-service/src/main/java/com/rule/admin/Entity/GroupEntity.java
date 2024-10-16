@@ -15,7 +15,16 @@ public class GroupEntity {
     @Id
     @GeneratedValue
     @Column(name = "group_id", unique = true, nullable = false, updatable = false)
-    private String id = UUID.randomUUID().toString();
+    public String id = UUID.randomUUID().toString();
+
+    @Column(name = "user_id")
+    public String userId;
+
+    @Column(name = "group_name")
+    public String groupName;
+
+    @Column(name = "run_type")
+    public String runType;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -23,10 +32,10 @@ public class GroupEntity {
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "rule_id")
     )
-    private Set<RuleEntity> rulesGroup;
+    public Set<RuleEntity> rules;
 
     @Column(name = "created_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Timestamp createdAt  = Timestamp.valueOf(LocalDateTime.now());
+    public Timestamp createdAt  = Timestamp.valueOf(LocalDateTime.now());
 
 }
