@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = Route.V1 + Route.GROUP, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,12 +28,11 @@ public class GroupController {
         return new ResponseEntity<>(groupService.getGroups(), HttpStatus.OK);
     }
 
-    @GetMapping("/{user}/{idGroup}")
+    @GetMapping("/{idGroup}")
     public ResponseEntity<Group> getRules(
-            @PathVariable String user,
-            @PathVariable Long idGroup
+            @PathVariable UUID idGroup
     ){
-        logger.info("--RULE-ADMIN-SERVICE GET GROUP --user [{}] --idGroup [{}]", user, idGroup);
+        logger.info("--RULE-ADMIN-SERVICE GET GROUP --idGroup [{}]", idGroup);
         return new ResponseEntity<>(groupService.findGroupById(idGroup), HttpStatus.OK) ;
     }
 
@@ -43,8 +43,8 @@ public class GroupController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Group> updateGroup(@RequestBody Group group){
-        logger.info("--RULE-ADMIN-SERVICE UPDATE GROUP --group [{}]", group.getGroupName());
+    public ResponseEntity<Group> updateGroupRules(@RequestBody Group group){
+        logger.info("--RULE-ADMIN-SERVICE UPDATE GROUP RULES --group [{}]", group.getGroupName());
         return new ResponseEntity<>(groupService.updateGroupById(group), HttpStatus.NO_CONTENT);
     }
 

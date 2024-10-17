@@ -25,7 +25,7 @@ public class GroupService {
          return Mapper.ListGroupFromListEntities(groupRepository.findAll());
     }
 
-    public Group findGroupById(Long GroupId){
+    public Group findGroupById(UUID GroupId){
         Optional<GroupEntity> groupEntity = groupRepository.findById(GroupId);
         if(groupEntity.isPresent()){
             return Mapper.GroupFromEntity(groupEntity.get());
@@ -47,8 +47,7 @@ public class GroupService {
     public Group updateGroupById(Group group){
         Optional<GroupEntity> groupEntity = groupRepository.findById(group.getId());
         if(groupEntity.isPresent()){
-            groupEntity.get().setGroup_rules(Mapper.ListEntitiesFromListRules(group.getRules()));
-            return Mapper.GroupFromEntity(groupRepository.save(groupEntity.get()));
+            return Mapper.GroupFromEntity(groupRepository.save(Mapper.EntityFromGroup(group)));
         }else{
             throw new RAException(HttpStatus.BAD_REQUEST, "400", "GROUP DOESN'T EXIST");
         }

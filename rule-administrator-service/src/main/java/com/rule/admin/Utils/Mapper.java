@@ -6,7 +6,6 @@ import com.rule.admin.model.Group;
 import com.rule.admin.model.Rule;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Mapper {
@@ -71,6 +70,7 @@ public class Mapper {
 
     public static GroupEntity EntityFromGroup(Group group){
         GroupEntity groupEntity = new GroupEntity();
+        groupEntity.setId(group.getId());
         groupEntity.setUserId(group.getUserId());
         groupEntity.setGroupName(group.getGroupName());
         groupEntity.setRunType(group.getRunType());
