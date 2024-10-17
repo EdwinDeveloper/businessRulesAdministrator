@@ -25,7 +25,12 @@ public class RuleController {
 
     @PostMapping("/Create")
     public ResponseEntity<Rule> createRule(@RequestBody Rule rule){
-        return new ResponseEntity<>(ruleService.createRule(rule), HttpStatus.OK) ;
+        return new ResponseEntity<>(ruleService.createRule(rule), HttpStatus.CREATED) ;
+    }
+
+    @PostMapping("/CreateBash")
+    public ResponseEntity<List<Rule>> createRulesByBash(@RequestBody List<Rule> rules){
+        return new ResponseEntity<>(ruleService.createRulesByBash(rules), HttpStatus.CREATED);
     }
 
 }

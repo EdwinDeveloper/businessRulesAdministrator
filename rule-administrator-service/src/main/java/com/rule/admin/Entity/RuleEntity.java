@@ -19,23 +19,23 @@ public class RuleEntity {
     @Column(name = "id", unique = true, nullable = false, updatable = false)
     private UUID id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private UUID userId;
 
-    @Column(name = "conditions")
+    @Column(name = "conditions", nullable = false)
     private String conditions;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "priority")
+    @Column(name = "priority", nullable = false)
     private String priority;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt = Timestamp.valueOf(LocalDateTime.now());
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp updatedAt = Timestamp.valueOf(LocalDateTime.now());
 

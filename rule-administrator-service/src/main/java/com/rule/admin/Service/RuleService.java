@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,21 @@ public class RuleService {
             return Mapper.RuleFromEntity(ruleRepository.save(Mapper.EntityFromRule(rule)));
         }catch (RAException e){
             logger.error("--RULE-ADMIN-SERVICE CREATE RULE --error [{}]", e.getMessage());
+            throw new RAException(HttpStatus.BAD_REQUEST, "400", e.getMessage(), e);
+        }
+    }
+
+    @Transactional
+    public List<Rule> createRulesByBash(List<Rule> rules){
+        try{
+            List<Rule> savedRules = new ArrayList<>();
+            rules.forEach(rule ->{
+                RuleEntity ruleEntity = ruleRepository.save(Mapper.EntityFromRule(rule));
+                savedRules.add(Mapper.RuleFromEntity(ruleEntity));
+            });
+            return savedRules;
+        }catch (RAException e){
+            logger.error("--RULE-ADMIN-SERVICE CREATE RULES BY BATCH --error [{}]", e.getMessage());
             throw new RAException(HttpStatus.BAD_REQUEST, "400", e.getMessage(), e);
         }
     }
