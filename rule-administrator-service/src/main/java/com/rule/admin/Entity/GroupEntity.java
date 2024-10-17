@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ public class GroupEntity {
     @Id
     @GeneratedValue
     @Column(name = "id", unique = true, nullable = false, updatable = false)
-    private UUID id;  // Removed UUID.randomUUID() initialization
+    private UUID id;
 
     @Column(name = "user_id")
     private String userId;
@@ -33,7 +34,7 @@ public class GroupEntity {
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "rule_id")  // Ensure this matches RuleEntity
     )
-    private Set<RuleEntity> group_rules;
+    private List<RuleEntity> group_rules;
 
     @Column(name = "created_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
@@ -71,11 +72,11 @@ public class GroupEntity {
         this.runType = runType;
     }
 
-    public Set<RuleEntity> getGroup_rules() {
+    public List<RuleEntity> getGroup_rules() {
         return group_rules;
     }
 
-    public void setGroup_rules(Set<RuleEntity> group_rules) {
+    public void setGroup_rules(List<RuleEntity> group_rules) {
         this.group_rules = group_rules;
     }
 

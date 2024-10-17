@@ -33,13 +33,19 @@ public class GroupController {
             @PathVariable Long idGroup
     ){
         logger.info("--RULE-ADMIN-SERVICE GET GROUP --user [{}] --idGroup [{}]", user, idGroup);
-        return new ResponseEntity<>(new Group(groupService.findGroupById(idGroup)), HttpStatus.OK) ;
+        return new ResponseEntity<>(groupService.findGroupById(idGroup), HttpStatus.OK) ;
     }
 
     @PostMapping("/{user}")
     public ResponseEntity<Group> createGroup(@PathVariable String user, @RequestBody Group group){
         logger.info("--RULE-ADMIN-SERVICE CREATE GROUP --user [{}]", user);
-        return new ResponseEntity<>(new Group(groupService.createGroup(user, group)), HttpStatus.CREATED) ;
+        return new ResponseEntity<>(groupService.createGroup(user, group), HttpStatus.CREATED) ;
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Group> updateGroup(@RequestBody Group group){
+        logger.info("--RULE-ADMIN-SERVICE UPDATE GROUP --group [{}]", group.getGroupName());
+        return new ResponseEntity<>(groupService.updateGroupById(group), HttpStatus.NO_CONTENT);
     }
 
 }

@@ -10,6 +10,7 @@ import java.util.UUID;
 public class Rule {
 
     private UUID id;
+    private UUID userId;
     private String conditions;
     private String name;
     private String priority;
@@ -19,20 +20,19 @@ public class Rule {
     public Rule(){
     }
 
-    public Rule(RuleEntity ruleEntity){
-        this.id = ruleEntity.getId();
-        this.conditions = ruleEntity.getConditions();
-        this.name = ruleEntity.getName();
-        this.priority = ruleEntity.getPriority();
-        this.nextTrue = ruleEntity.getNextTrue();
-        this.nextFalse = ruleEntity.getNextFalse();
-    }
-
     public UUID getId() {
         return id;
     }
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public UUID getUserId(){
+        return userId;
+    }
+
+    public void setUserId(UUID userId){
+        this.userId = userId;
     }
     public String getConditions() {
         return conditions;

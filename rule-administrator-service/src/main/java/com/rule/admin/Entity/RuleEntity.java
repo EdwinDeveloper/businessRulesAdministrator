@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,7 +17,10 @@ public class RuleEntity {
     @Id
     @GeneratedValue
     @Column(name = "id", unique = true, nullable = false, updatable = false)
-    private UUID id;  // Removed UUID.randomUUID() initialization
+    private UUID id;
+
+    @Column(name = "user_id")
+    private UUID userId;
 
     @Column(name = "conditions")
     private String conditions;
@@ -37,7 +41,7 @@ public class RuleEntity {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "group_rules")
     @JsonIgnoreProperties("group_rules")
-    private Set<GroupEntity> group_rules;
+    private List<GroupEntity> group_rules;
 
     @Column(name = "next_true")
     private String nextTrue;
@@ -51,6 +55,14 @@ public class RuleEntity {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public UUID getUserId(){
+        return userId;
+    }
+
+    public void setUserId(UUID userId){
+        this.userId = userId;
     }
 
     public String getConditions() {
@@ -93,11 +105,11 @@ public class RuleEntity {
         this.updatedAt = updatedAt;
     }
 
-    public Set<GroupEntity> getGroup_rules() {
+    public List<GroupEntity> getGroup_rules() {
         return group_rules;
     }
 
-    public void setGroup_rules(Set<GroupEntity> group_rules) {
+    public void setGroup_rules(List<GroupEntity> group_rules) {
         this.group_rules = group_rules;
     }
 

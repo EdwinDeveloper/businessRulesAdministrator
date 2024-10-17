@@ -3,14 +3,14 @@ package com.rule.admin.model;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.rule.admin.Entity.GroupEntity;
-import com.rule.admin.Entity.RuleEntity;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Group {
-    private Set<RuleEntity> rules;
+    private List<Rule> rules;
     private String userId;
     private UUID id;
     private String groupName;
@@ -18,20 +18,11 @@ public class Group {
 
     public Group() {
     }
-
-    public Group(GroupEntity groupEntity){
-        this.setUserId(groupEntity.getUserId());
-        this.setGroupName(groupEntity.getGroupName());
-        this.setRunType(groupEntity.getRunType());
-        this.setRules(groupEntity.getGroup_rules());
-    }
-
-
-    public Set<RuleEntity> getRules() {
+    public List<Rule> getRules() {
         return rules;
     }
 
-    public void setRules(Set<RuleEntity> rules) {
+    public void setRules(List<Rule> rules) {
         this.rules = rules;
     }
 
