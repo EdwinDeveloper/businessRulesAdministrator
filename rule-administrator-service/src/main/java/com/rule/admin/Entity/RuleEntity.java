@@ -35,7 +35,7 @@ public class RuleEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp updatedAt = Timestamp.valueOf(LocalDateTime.now());
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "group_rules")  // Ensure this matches GroupEntity
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "group_rules")
     @JsonIgnoreProperties("group_rules")
     private Set<GroupEntity> group_rules;
 

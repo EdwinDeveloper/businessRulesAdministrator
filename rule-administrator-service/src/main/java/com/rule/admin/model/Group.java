@@ -10,19 +10,60 @@ import java.util.UUID;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Group {
-    public Set<RuleEntity> rules;
-    public String userId;
-    public UUID id;
-    public String groupName;
-    public String runType;
+    private Set<RuleEntity> rules;
+    private String userId;
+    private UUID id;
+    private String groupName;
+    private String runType;
 
     public Group() {
     }
 
     public Group(GroupEntity groupEntity){
-        this.userId = groupEntity.getUserId();
-        this.groupName = groupEntity.getGroupName();
-        this.runType = groupEntity.getRunType();
-        this.rules = groupEntity.getGroup_rules();
+        this.setUserId(groupEntity.getUserId());
+        this.setGroupName(groupEntity.getGroupName());
+        this.setRunType(groupEntity.getRunType());
+        this.setRules(groupEntity.getGroup_rules());
+    }
+
+
+    public Set<RuleEntity> getRules() {
+        return rules;
+    }
+
+    public void setRules(Set<RuleEntity> rules) {
+        this.rules = rules;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getRunType() {
+        return runType;
+    }
+
+    public void setRunType(String runType) {
+        this.runType = runType;
     }
 }
