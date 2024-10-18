@@ -11,7 +11,7 @@ import java.util.UUID;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Group {
     private List<Rule> rules;
-    private String userId;
+    private UUID userId;
     private UUID id;
     private String groupName;
     private String runType;
@@ -26,11 +26,11 @@ public class Group {
         this.rules = rules;
     }
 
-    public String getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 

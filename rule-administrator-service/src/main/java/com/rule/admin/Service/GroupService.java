@@ -35,6 +35,11 @@ public class GroupService {
         }
     }
 
+    public List<Group> findGroupByUserId(UUID userId){
+        List<GroupEntity> groupListEntity = groupRepository.findByUserId(userId);
+        return Mapper.ListGroupFromListEntities(groupListEntity);
+    }
+
     public Group createGroup(String user, Group group){
         try{
             return Mapper.GroupFromEntity(groupRepository.save(Mapper.EntityFromGroup(group)));

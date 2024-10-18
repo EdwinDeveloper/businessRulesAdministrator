@@ -28,6 +28,11 @@ public class GroupController {
         return new ResponseEntity<>(groupService.getGroups(), HttpStatus.OK);
     }
 
+    @GetMapping("/User/{userId}")
+    public ResponseEntity<List<Group>> getGroupsByUser(@PathVariable UUID userId){
+        return new ResponseEntity<>(groupService.findGroupByUserId(userId), HttpStatus.OK);
+    }
+
     @GetMapping("/{idGroup}")
     public ResponseEntity<Group> getRules(
             @PathVariable UUID idGroup

@@ -20,7 +20,7 @@ public class GroupEntity {
     private UUID id;
 
     @Column(name = "user_id")
-    private String userId;
+    private UUID userId;
 
     @Column(name = "group_name", unique = true)
     private String groupName;
@@ -48,11 +48,11 @@ public class GroupEntity {
         this.id = id;
     }
 
-    public String getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 

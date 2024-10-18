@@ -4,6 +4,7 @@ import com.rule.admin.Entity.GroupEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -11,5 +12,7 @@ import java.util.UUID;
 public interface GroupRepository extends JpaRepository<GroupEntity, Long> {
 
     Optional<GroupEntity> findById(UUID id);
+
+    List<GroupEntity> findByUserId(UUID userId);
 
 }
