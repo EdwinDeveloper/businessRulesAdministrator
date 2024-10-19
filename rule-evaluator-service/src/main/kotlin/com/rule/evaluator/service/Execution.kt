@@ -36,9 +36,9 @@ class Execution {
             ruleId = null,
             flow = inputRequest.groupId
         )
-        val runSaved = runRepository.save(runEntity)
+        runRepository.save(runEntity)
 
-        val response = 2 //flow.processFlow(inputRequest.task, inputRequest.input, runSaved, flow.second, flow.third.runType)
+        val response = flow.first.processFlow(inputRequest, runEntity, flow.second.rules, flow.second.runType)
         val responseString = response.toJsonString()
         logger.info("RULE-VALIDATOR-SERVICE -- running -- result [{}]", responseString)
         return response
