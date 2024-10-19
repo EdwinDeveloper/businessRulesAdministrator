@@ -15,6 +15,22 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      
+  postgres2:
+    image: postgres:latest
+    container_name: db_rule_evaluator
+    env_file:
+      - .env
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata2:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
 
 volumes:
   pgdata:
+  pgdata2:
