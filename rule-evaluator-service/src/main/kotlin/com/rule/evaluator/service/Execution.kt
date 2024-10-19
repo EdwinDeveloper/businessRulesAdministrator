@@ -24,17 +24,17 @@ class Execution {
     fun start(inputRequest: InputRequest): Any {
 
         logger.info("RULE-VALIDATOR-SERVICE -- running -- init [{}]", inputRequest.traceabilityId)
-        val flow = rulesFlowMapper.getRules(inputRequest)
+        val flow = rulesFlowMapper.getGroup(inputRequest)
         logger.info("RULE-VALIDATOR-SERVICE -- running -- getFlows [{}] [{}]", flow::class.java.simpleName, inputRequest.traceabilityId)
 
         val runEntity = RunEntity(
             input = inputRequest.toJsonString(),
             traceabilityId = inputRequest.traceabilityId,
-            userId = UUID.fromString(inputRequest.user),
+            userId = inputRequest.user,
             response = null,
             createdAt = LocalDateTime.now(),
             ruleId = null,
-            flow = inputRequest.task.toString()
+            flow = inputRequest.groupId
         )
         val runSaved = runRepository.save(runEntity)
 

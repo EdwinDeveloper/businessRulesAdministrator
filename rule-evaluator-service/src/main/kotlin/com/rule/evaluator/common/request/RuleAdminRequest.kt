@@ -7,6 +7,6 @@ import java.util.UUID
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class RuleAdminRequest(
     val task: String? = null,
-    val user: String,
+    val user: UUID,
     val traceabilityId: UUID
 )

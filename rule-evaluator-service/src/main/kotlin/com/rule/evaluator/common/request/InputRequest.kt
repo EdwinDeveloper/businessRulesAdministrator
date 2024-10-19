@@ -6,8 +6,8 @@ import java.util.UUID
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class InputRequest (
-    val task: String? = null,
-    val user: String,
+    val groupId: String,
+    val user: UUID,
     var input: MutableMap<String, Any>,
     val traceabilityId: UUID
 )
