@@ -6,12 +6,10 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
-@Table(name = "rule")  // Correct table name for RuleEntity
+@Table(name = "rule")
 public class RuleEntity {
 
     @Id
@@ -24,6 +22,10 @@ public class RuleEntity {
 
     @Column(name = "conditions", nullable = false)
     private String conditions;
+
+    @Column(name = "result")
+    //@Convert(converter = HashMapConverter.class)
+    private Map<String, Object> result;
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;

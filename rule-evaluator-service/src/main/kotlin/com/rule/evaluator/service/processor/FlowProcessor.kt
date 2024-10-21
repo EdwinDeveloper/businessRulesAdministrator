@@ -11,5 +11,5 @@ interface FlowProcessor {
         evaluatorEntity: EvaluatorEntity,
         rules: List<Rules>,
         runType: TypeFlow
-    ): Any
+    ): Map<String, Any>
 }

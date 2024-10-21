@@ -9,7 +9,7 @@ import java.util.*
 import com.rule.evaluator.entity.EvaluatorEntity
 
 @Service
-abstract class coreEngine<INPUT : Any, OUTPUT> {
+abstract class CoreEngine<INPUT : Any, OUTPUT> {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
 
@@ -33,12 +33,12 @@ abstract class coreEngine<INPUT : Any, OUTPUT> {
         listOfRules.forEach { rule ->
             val conditionCodes = rule.conditions
 
-            if (mvlParser.evaluatorMVel(conditionCodes, inputData)) {
+            if (!mvlParser.evaluatorMVel(conditionCodes, inputData)) {
                 logger.info("RULE EVALUATOR -- CHECKING [{}]", rule)
-                return Pair(rule, true)
+                return Pair(rule, false)
             }
         }
-        return Pair(null, null)
+        return Pair(null, true)
     }
 
     protected abstract fun outputResult(

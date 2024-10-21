@@ -4,11 +4,17 @@ import com.rule.evaluator.common.Rules
 import com.rule.evaluator.common.enums.TypeFlow
 import com.rule.evaluator.common.request.InputRequest
 import com.rule.evaluator.entity.EvaluatorEntity
+import com.rule.evaluator.service.Implementation.LinealEngine
 import com.rule.evaluator.service.flow.Flow
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class Lineal : Flow<Map<String, Any>, Any>() {
+class Lineal : Flow<Map<String, Any>>() {
+
+    @Autowired
+    private lateinit var linealEngine: LinealEngine
+
     override fun getExternalInfo(inputRequest: InputRequest): Map<String, Any> {
         TODO("Not yet implemented")
     }
@@ -18,7 +24,8 @@ class Lineal : Flow<Map<String, Any>, Any>() {
         evaluatorEntity: EvaluatorEntity,
         rules: List<Rules>,
         runType: TypeFlow
-    ): Any {
-        TODO("Not yet implemented")
+    ): Map<String, Any> {
+        var response = linealEngine.ruleGroupExecution(rules, requestData, evaluatorEntity)
+        return response
     }
 }

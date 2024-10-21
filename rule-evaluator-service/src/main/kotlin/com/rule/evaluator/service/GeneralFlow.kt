@@ -8,7 +8,7 @@ import com.rule.evaluator.service.flow.Flow
 import org.springframework.stereotype.Service
 
 @Service
-class GeneralFlow : Flow<Map<String, Any>, Any>() {
+class GeneralFlow : Flow<Map<String, Any>>() {
     override fun getExternalInfo(inputRequest: InputRequest): Map<String, Any> {
         TODO("Not yet implemented")
     }
@@ -18,7 +18,7 @@ class GeneralFlow : Flow<Map<String, Any>, Any>() {
         evaluatorEntity: EvaluatorEntity,
         rules: List<Rules>,
         runType: TypeFlow
-    ): Any {
+    ): Map<String, Any> {
         TODO("Not yet implemented")
     }
 
