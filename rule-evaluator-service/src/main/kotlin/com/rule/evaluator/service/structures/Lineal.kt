@@ -3,7 +3,7 @@ package com.rule.evaluator.service.structures
 import com.rule.evaluator.common.Rules
 import com.rule.evaluator.common.enums.TypeFlow
 import com.rule.evaluator.common.request.InputRequest
-import com.rule.evaluator.entity.RunEntity
+import com.rule.evaluator.entity.EvaluatorEntity
 import com.rule.evaluator.service.flow.Flow
 import org.springframework.stereotype.Service
 
@@ -15,7 +15,7 @@ class Lineal : Flow<Map<String, Any>, Any>() {
 
     override fun completeEvaluation(
         requestData: Map<String, Any>,
-        runEntity: RunEntity,
+        evaluatorEntity: EvaluatorEntity,
         rules: List<Rules>,
         runType: TypeFlow
     ): Any {

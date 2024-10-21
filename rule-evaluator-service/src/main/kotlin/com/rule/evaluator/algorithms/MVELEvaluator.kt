@@ -8,7 +8,7 @@ class MVELEvaluator {
 
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-    fun evaluatorMVel(conditions: String, dataToEvaluate: Map<String, Any>) : Boolean{
+    fun evaluatorMVel(conditions: String, dataToEvaluate: Any) : Boolean{
         try{
             val evaluation = MVEL.evalToBoolean(conditions, dataToEvaluate)
             logger.info("RULE-EVALUATOR-SERVICE : condition : {} ", conditions)
