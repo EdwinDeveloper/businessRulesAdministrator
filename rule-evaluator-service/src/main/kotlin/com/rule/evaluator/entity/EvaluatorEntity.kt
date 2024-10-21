@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 @Table(name = "run")
-class RunEntity (
+class EvaluatorEntity (
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
