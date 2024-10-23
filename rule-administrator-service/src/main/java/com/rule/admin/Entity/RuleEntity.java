@@ -23,9 +23,9 @@ public class RuleEntity {
     @Column(name = "conditions", nullable = false)
     private String conditions;
 
-    @Column(name = "result")
+    //@Column(name = "result")
     //@Convert(converter = HashMapConverter.class)
-    private Map<String, Object> result;
+    //private Map<String, Object> result;
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
