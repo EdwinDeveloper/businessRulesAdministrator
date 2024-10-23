@@ -3,7 +3,14 @@ import { RuleCardListComponent } from './components/RuleCart/RuleCardList'
 
 const App: FC = () => {
   return (
-    <RuleCardListComponent/>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignContent: 'center'
+    }}>
+      <RuleCardListComponent/>
+    </div>  
   );
 };
 
