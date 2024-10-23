@@ -1,8 +1,10 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { RuleCard } from './../../models/Elements';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 import { RuleCardComponent } from './RuleCart';
+import { FetchCall } from '../../config/fetch';
+import { GetAllGroupsOfUser } from '../../config/services';
 
 const initialCards: RuleCard[] = [
     { id: '1', content: 'current >= 12 && currency > 3' },
@@ -12,6 +14,15 @@ const initialCards: RuleCard[] = [
   ];
 
 export const RuleCardListComponent: FC = () => {
+
+    const fetchGroups = async() => {
+      const groups = await FetchCall(GetAllGroupsOfUser("7538cf7e-6621-45c4-aa5a-9d74779086a6"))
+      console.log("groups : ", groups); 
+    }
+
+    useEffect(() => {
+      fetchGroups();
+  }, []);
 
     const [cards, setCards] = useState<RuleCard[]>(initialCards);
 

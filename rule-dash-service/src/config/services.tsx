@@ -2,7 +2,7 @@ import { AxiosOptions } from './AxiosOptions'
 
 const url_base = "http://localhost:8080"
 
-export function getAllGroupsOfUser(userId: String): AxiosOptions{
+export function GetAllGroupsOfUser(userId: String): AxiosOptions{
     let options: AxiosOptions = {
         method: 'get',
         headers: {
