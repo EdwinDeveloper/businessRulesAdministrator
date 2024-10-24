@@ -3,8 +3,10 @@ package com.rule.admin.Service;
 import com.rule.admin.Entity.GroupEntity;
 import com.rule.admin.Exception.RAException;
 import com.rule.admin.Repository.GroupRepository;
+import com.rule.admin.Repository.RuleRepository;
 import com.rule.admin.Utils.Mapper;
 import com.rule.admin.model.Group;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class GroupService {
 
     @Autowired
     private GroupRepository groupRepository;
+
+    @Autowired
+    private RuleRepository ruleRepository;
 
     public List<Group> getGroups(){
          return Mapper.ListGroupFromListEntities(groupRepository.findAll());
@@ -40,8 +45,12 @@ public class GroupService {
         return Mapper.ListGroupFromListEntities(groupListEntity);
     }
 
-    public Group createGroup(String user, Group group){
+    @Transactional
+    public Group createOrUpdateGroup(String user, Group group){
         try{
+            group.getRules().forEach(rule -> {
+                ruleRepository.save(Mapper.EntityFromRule(rule));
+            });
             return Mapper.GroupFromEntity(groupRepository.save(Mapper.EntityFromGroup(group)));
         }catch (Exception e){
             logger.error("--RULE-ADMIN-SERVICE CREATE GROUP --error [{}]", e.getMessage());
@@ -49,9 +58,11 @@ public class GroupService {
         }
     }
 
+    @Transactional
     public Group updateGroupById(Group group){
         Optional<GroupEntity> groupEntity = groupRepository.findById(group.getId());
         if(groupEntity.isPresent()){
+
             return Mapper.GroupFromEntity(groupRepository.save(Mapper.EntityFromGroup(group)));
         }else{
             throw new RAException(HttpStatus.BAD_REQUEST, "400", "GROUP DOESN'T EXIST");

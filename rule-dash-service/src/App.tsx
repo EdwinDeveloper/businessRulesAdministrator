@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { RuleCardListComponent } from './components/RuleCart/RuleCardList'
+import { GroupList } from './components/GroupList/GroupList';
 
 const App: FC = () => {
   return (
@@ -9,7 +9,7 @@ const App: FC = () => {
       alignItems: 'center',
       alignContent: 'center'
     }}>
-      <RuleCardListComponent/>
+      <GroupList/>
     </div>  
   );
 };

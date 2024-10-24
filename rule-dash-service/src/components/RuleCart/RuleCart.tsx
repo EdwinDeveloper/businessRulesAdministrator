@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
+import './RuleCard.css'
 import { Rule } from '../../models/Elements';
 import { useDrag, useDrop } from 'react-dnd';
 
-export const RuleCardComponent: FC<{ 
-        rule: Rule; 
-        index: number; 
-        moveRule: (
-            dragIndex: number, 
-            hoverIndex: number
-        ) => void }
-    > = ({ rule, index, moveRule }) => {
+interface RuleCard{
+  rule: Rule,
+  index: number,
+  moveRule: (dragIndex: number, hoverIndex: number) => void
+}
+
+export const RuleCardComponent: FC<RuleCard> = ({ rule, index, moveRule }) => {
     const [, ref] = useDrag({
       type: 'CARD',
       item: { index },
@@ -28,21 +28,7 @@ export const RuleCardComponent: FC<{
     return (
       <div
         ref={(node) => ref(drop(node))}
-        style={{
-          width: '95%',
-          justifyContent: 'center',
-          alignContent: 'center',
-          alignItems: 'center',
-          padding: '16px',
-          margin: '12px',
-          backgroundColor: '#f2f2f2',
-          borderRadius: '8px',
-          cursor: 'move',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '24px',
-        }}
+        className='rule-card'
       >
         <div style={{ fontWeight: 'bold', fontSize: '16px', width: '120px' }}>
           {rule.name}

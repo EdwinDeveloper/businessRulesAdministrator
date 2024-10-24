@@ -1,0 +1,19 @@
+.general-button{
+    width: 80px;
+    height: 50px;
+    background-color: #60a5fa;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.general-button:hover {
+    background-color: #3b82f6;
+}
+
+.general-button:active{
+    background-color: #306ed2;
+}

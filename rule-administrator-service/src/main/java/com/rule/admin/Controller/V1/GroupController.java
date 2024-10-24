@@ -44,7 +44,7 @@ public class GroupController {
     @PostMapping("/{user}")
     public ResponseEntity<Group> createGroup(@PathVariable String user, @RequestBody Group group){
         logger.info("--RULE-ADMIN-SERVICE CREATE GROUP --user [{}]", user);
-        return new ResponseEntity<>(groupService.createGroup(user, group), HttpStatus.CREATED) ;
+        return new ResponseEntity<>(groupService.createOrUpdateGroup(user, group), HttpStatus.CREATED) ;
     }
 
     @PutMapping("/update")

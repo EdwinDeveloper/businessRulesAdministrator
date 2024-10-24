@@ -1,0 +1,22 @@
+.card-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 70%;
+    min-height: 80vh;        
+}
+
+.list-container{
+    display: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+}
