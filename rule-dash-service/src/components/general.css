@@ -17,3 +17,10 @@
 .general-button:active{
     background-color: #306ed2;
 }
+
+.button-container{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}

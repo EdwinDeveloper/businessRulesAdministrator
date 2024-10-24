@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC } from 'react'
 import './RuleCardList.css'
 import '../general.css'
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -8,12 +8,12 @@ import { Rule } from '../../models/Elements';
 
 interface RuleCardList{
   rules: Rule[]
-  setRules: (rules: Rule[])=> void
+  setRules: (rules: Rule[])=> void,
+  handleUpdateGroup: ()=> void,
+  handleNotSelectedGroup: ()=> void
 }
 
-export const RuleCardListComponent: FC<RuleCardList> = ( { rules, setRules } ) => {
-
-  //const [rules, setRules] = useState<Rule[]>(rules);
+export const RuleCardListComponent: FC<RuleCardList> = ( { rules, setRules, handleUpdateGroup, handleNotSelectedGroup } ) => {
 
   const moveRule = (dragIndex: number, hoverIndex: number) => {
     const updatedRules = [...rules];
@@ -26,7 +26,7 @@ export const RuleCardListComponent: FC<RuleCardList> = ( { rules, setRules } ) =
     setRules(prioritizedRules);
   };
 
-  const updateGroup = ()=> {
+  const runGroup = () => {
 
   }
   
@@ -44,7 +44,9 @@ export const RuleCardListComponent: FC<RuleCardList> = ( { rules, setRules } ) =
               }
             </div>
             <div className='button-container'>
-              <button onClick={() => updateGroup()} className="general-button">Update</button>
+              <button onClick={() => runGroup()} className="general-button">Run</button>
+              <button onClick={() => handleNotSelectedGroup()} className="general-button">Back</button>
+              <button onClick={() => handleUpdateGroup()} className="general-button">Update</button>
             </div>
           </div>
         ) : (
