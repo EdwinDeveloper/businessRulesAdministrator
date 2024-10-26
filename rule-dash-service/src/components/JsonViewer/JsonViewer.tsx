@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 import './JsonViewer.css';
+import '../general.css'
 
 interface JsonViewerProps {
     initialJsonData: Record<string, any>;
@@ -35,6 +36,9 @@ export const JsonViewer: React.FC<JsonViewerProps> = ({ initialJsonData }) => {
             {error && <p className="error">{error}</p>}
             <div className="jsonViewer">
                 <pre>{JSON.stringify(jsonData, null, 2)}</pre>
+            </div>
+            <div>
+                <button onClick={()=>{}} className="general-button">Execute</button>
             </div>
         </div>
     );

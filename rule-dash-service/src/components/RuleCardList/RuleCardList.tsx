@@ -6,14 +6,15 @@ import { DndProvider } from 'react-dnd';
 import { RuleCardComponent } from '../RuleCart/RuleCart';
 import { Rule } from '../../models/Elements';
 
-interface RuleCardList{
+interface RuleCardListProps{
   rules: Rule[]
   setRules: (rules: Rule[])=> void,
   handleUpdateGroup: ()=> void,
   handleNotSelectedGroup: ()=> void
+  setRun: (run: boolean)=>void
 }
 
-export const RuleCardListComponent: FC<RuleCardList> = ( { rules, setRules, handleUpdateGroup, handleNotSelectedGroup } ) => {
+export const RuleCardListComponent: FC<RuleCardListProps> = ( { setRun, rules, setRules, handleUpdateGroup, handleNotSelectedGroup } ) => {
 
   const moveRule = (dragIndex: number, hoverIndex: number) => {
     const updatedRules = [...rules];
@@ -44,7 +45,7 @@ export const RuleCardListComponent: FC<RuleCardList> = ( { rules, setRules, hand
               }
             </div>
             <div className='button-container'>
-              <button onClick={() => runGroup()} className="general-button">Run</button>
+              <button onClick={() => setRun(true)} className="general-button">Run</button>
               <button onClick={() => handleNotSelectedGroup()} className="general-button">Back</button>
               <button onClick={() => handleUpdateGroup()} className="general-button">Update</button>
             </div>
