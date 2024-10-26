@@ -2,13 +2,14 @@ import { FC, useState, ChangeEvent } from 'react';
 import './JsonViewer.css';
 import '../general.css'
 import { RequestEvaluator } from '../../models/Elements';
+import { runEvaluationApi } from '../../config/serivceImpl';
 
 interface JsonViewerProps {
     initialJsonData: RequestEvaluator | undefined;
 }
 
 export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData }) => {
-    const [jsonData, setJsonData] = useState(initialJsonData);
+    const [jsonData, setJsonData] = useState<RequestEvaluator | null | undefined>(initialJsonData);
     const [textData, setTextData] = useState(JSON.stringify(
         {
             ...initialJsonData,
@@ -32,7 +33,14 @@ export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData }) => {
         } catch (e) {
             setError("Invalid JSON format");
         }
-    };
+    }
+
+    const RunEvaluation = async(jsonData: RequestEvaluator | undefined | null) => {
+        if(jsonData !== undefined && jsonData !== null){
+            const resultRules = await runEvaluationApi(jsonData);
+            console.log(resultRules.data)
+        }
+    }
 
     return (
         <div className="container">
@@ -46,7 +54,7 @@ export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData }) => {
                 <pre>{JSON.stringify(jsonData, null, 2)}</pre>
             </div>
             <div>
-                <button disabled={error!=null} onClick={()=>{}} className="general-button">Execute</button>
+                <button disabled={error!=null} onClick={()=>RunEvaluation(jsonData)} className="general-button">Execute</button>
             </div>
         </div>
     );

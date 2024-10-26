@@ -1,6 +1,7 @@
 import { Group } from '../models/Elements'
 import { AxiosOptions } from './AxiosOptions'
 import { RULE_ADMIN_URL, RULE_EVALUATOR_URL } from './apiConfig'
+import { RequestEvaluator } from '../models/Elements'
 
 const url_base = "http://localhost:8080"
 
@@ -28,14 +29,14 @@ export function UpdateGroupRules(group: Group): AxiosOptions{
     return options
 }
 
-export function StartEvaluationRules(): AxiosOptions{
+export function RunEvaluationRules(requestGenerator: RequestEvaluator): AxiosOptions{
     let options: AxiosOptions = {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
         url: `${RULE_EVALUATOR_URL}/in`,
-        data: {}
+        data: requestGenerator
     }
     return options
 }

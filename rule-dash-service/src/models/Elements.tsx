@@ -6,6 +6,10 @@ export interface UpdateGroupUserResponse extends DefaultResponse{
   data: Group
 }
 
+export interface RunEvaluationResponse extends DefaultResponse{
+  data: Map<string, unknown>
+}
+
 export interface RequestEvaluator{
     traceability_id: string,
     group_id: string,
