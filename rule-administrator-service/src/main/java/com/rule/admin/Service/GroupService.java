@@ -62,7 +62,9 @@ public class GroupService {
     public Group updateGroupById(Group group){
         Optional<GroupEntity> groupEntity = groupRepository.findById(group.getId());
         if(groupEntity.isPresent()){
-
+            group.getRules().forEach(rule -> {
+                ruleRepository.save(Mapper.EntityFromRule(rule));
+            });
             return Mapper.GroupFromEntity(groupRepository.save(Mapper.EntityFromGroup(group)));
         }else{
             throw new RAException(HttpStatus.BAD_REQUEST, "400", "GROUP DOESN'T EXIST");

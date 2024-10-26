@@ -2,6 +2,10 @@ export interface GetGroupsUsersResponse extends DefaultResponse{
   data: Group[]
 }
 
+export interface UpdateGroupUserResponse extends DefaultResponse{
+  data: Group
+}
+
 export interface Rule {
     id: string;
     userId: string;
