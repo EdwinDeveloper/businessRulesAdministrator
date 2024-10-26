@@ -19,6 +19,12 @@
     background-color: #306ed2;
 }
 
+.general-button:disabled{
+    background-color: #9bc6fa;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
 .button-container{
     display: flex;
     width: 100%;

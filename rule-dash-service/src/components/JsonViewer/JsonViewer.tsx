@@ -1,14 +1,22 @@
-import React, { useState, ChangeEvent } from 'react';
+import { FC, useState, ChangeEvent } from 'react';
 import './JsonViewer.css';
 import '../general.css'
+import { RequestEvaluator } from '../../models/Elements';
 
 interface JsonViewerProps {
-    initialJsonData: Record<string, any>;
+    initialJsonData: RequestEvaluator | undefined;
 }
 
-export const JsonViewer: React.FC<JsonViewerProps> = ({ initialJsonData }) => {
+export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData }) => {
     const [jsonData, setJsonData] = useState(initialJsonData);
-    const [textData, setTextData] = useState(JSON.stringify(initialJsonData, null, 2));
+    const [textData, setTextData] = useState(JSON.stringify(
+        {
+            ...initialJsonData,
+            input: initialJsonData?.input instanceof Map ? Object.fromEntries(initialJsonData.input) : initialJsonData?.input
+        }, 
+        null, 
+        2
+    ));
     const [error, setError] = useState<string | null>(null);
 
     const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -38,7 +46,7 @@ export const JsonViewer: React.FC<JsonViewerProps> = ({ initialJsonData }) => {
                 <pre>{JSON.stringify(jsonData, null, 2)}</pre>
             </div>
             <div>
-                <button onClick={()=>{}} className="general-button">Execute</button>
+                <button disabled={error!=null} onClick={()=>{}} className="general-button">Execute</button>
             </div>
         </div>
     );

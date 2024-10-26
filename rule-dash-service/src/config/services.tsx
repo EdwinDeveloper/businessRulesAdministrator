@@ -1,5 +1,6 @@
 import { Group } from '../models/Elements'
 import { AxiosOptions } from './AxiosOptions'
+import { RULE_ADMIN_URL, RULE_EVALUATOR_URL } from './apiConfig'
 
 const url_base = "http://localhost:8080"
 
@@ -9,7 +10,7 @@ export function GetAllGroupsOfUser(userId: String): AxiosOptions{
         headers: {
             'Content-Type': 'application/json'
         },
-        url: `${url_base}/V1/Group/User/${userId}`,
+        url: `${RULE_ADMIN_URL}/V1/Group/User/${userId}`,
         data: {}
     }
     return options
@@ -21,8 +22,20 @@ export function UpdateGroupRules(group: Group): AxiosOptions{
         headers: {
             'Content-Type': 'application/json'
         },
-        url: `${url_base}/V1/Group/update`,
+        url: `${RULE_ADMIN_URL}/V1/Group/update`,
         data: group
+    }
+    return options
+}
+
+export function StartEvaluationRules(): AxiosOptions{
+    let options: AxiosOptions = {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        url: `${RULE_EVALUATOR_URL}/in`,
+        data: {}
     }
     return options
 }

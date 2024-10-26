@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RuleCardListComponent } from '../RuleCardList/RuleCardList';
 import { Group, Rule } from '../../models/Elements';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import { JsonViewer } from '../JsonViewer/JsonViewer';
+import { v4 as uuidv4 } from 'uuid';
+import { RequestEvaluator } from '../../models/Elements';
 
 interface GroupDetailsProps {
     group: Group;
@@ -17,7 +19,27 @@ interface GroupDetailsProps {
 
 const GroupDetails: React.FC<GroupDetailsProps> = ({ run, setRun, group, rules, loading, onUpdateGroup, onDeselectGroup, setRules }) => {
 
-    const sampleJson = { data: "data1", items: [1, 2, 3], nested: { a: true, b: false } };
+    const [sampleJson, setSampleJson] = useState<RequestEvaluator>()
+    const requestGenerator = () => {
+        const newUuid = uuidv4();
+        const json : RequestEvaluator= {
+            traceability_id: newUuid,
+            group_id: group.id,
+            user: group.user_id,
+            input: new Map<string, unknown>([
+                ['condition1', 20],
+                ["condition2", 3],
+                ["condition3", 60],
+                ["condition4", 45],
+                ["condition", 2]
+            ]),
+        }
+        return json
+    }
+
+    useEffect(()=>{
+        setSampleJson(requestGenerator())
+    },[])
 
     return (
         <div>
