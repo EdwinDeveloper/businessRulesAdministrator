@@ -14,6 +14,7 @@ public class Mapper {
         Rule ruleModel = new Rule();
         ruleModel.setId(ruleEntity.getId());
         ruleModel.setConditions(ruleEntity.getConditions());
+        ruleModel.setResult(ruleEntity.getResult());
         ruleModel.setName(ruleEntity.getName());
         ruleModel.setPriority(ruleEntity.getPriority());
         ruleModel.setUserId(ruleEntity.getUserId());
@@ -34,11 +35,25 @@ public class Mapper {
         RuleEntity ruleEntity = new RuleEntity();
         ruleEntity.setId(rule.getId());
         ruleEntity.setConditions(rule.getConditions());
+        ruleEntity.setResult(rule.getResult());
         ruleEntity.setName(rule.getName());
         ruleEntity.setPriority(rule.getPriority());
         ruleEntity.setUserId(rule.getUserId());
         ruleEntity.setNextFalse(rule.getNextFalse());
         ruleEntity.setNextTrue(rule.getNextTrue());
+        return ruleEntity;
+    }
+
+    public static RuleEntity EntityFromRuleAndEntity(Rule rule, RuleEntity oldEntity){
+        RuleEntity ruleEntity = new RuleEntity();
+        ruleEntity.setId( rule.getId() == null ? oldEntity.getId() : rule.getId());
+        ruleEntity.setConditions(rule.getConditions() == null ? oldEntity.getConditions() : rule.getConditions());
+        ruleEntity.setResult(rule.getResult() == null ? oldEntity.getResult() : rule.getResult());
+        ruleEntity.setName(rule.getName() == null ? oldEntity.getName() : rule.getName());
+        ruleEntity.setPriority(rule.getPriority() == null ? oldEntity.getPriority() : rule.getPriority());
+        ruleEntity.setUserId(rule.getUserId() == null ? oldEntity.getUserId() : rule.getUserId());
+        ruleEntity.setNextFalse(rule.getNextFalse() == null ? oldEntity.getNextFalse() : rule.getNextFalse());
+        ruleEntity.setNextTrue(rule.getNextTrue() == null ? oldEntity.getNextTrue() : rule.getNextTrue());
         return ruleEntity;
     }
 

@@ -15,4 +15,6 @@ public interface GroupRepository extends JpaRepository<GroupEntity, Long> {
 
     List<GroupEntity> findByUserId(UUID userId);
 
+    Optional<GroupEntity> findByGroupName(String groupName);
+
 }

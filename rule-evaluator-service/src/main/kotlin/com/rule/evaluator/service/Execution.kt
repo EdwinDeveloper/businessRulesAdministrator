@@ -35,7 +35,7 @@ class Execution {
             ruleId = null,
             flow = inputRequest.groupId
         )
-        evaluatorRepository.save(evaluatorEntity)
+        //evaluatorRepository.save(evaluatorEntity)
 
         val response = flow.first.processFlow(inputRequest, evaluatorEntity, flow.second.rules, flow.second.runType)
         val responseString = response.toJsonString()

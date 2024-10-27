@@ -2,6 +2,7 @@ package com.rule.admin.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.rule.admin.Utils.HashMapConverter;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -23,9 +24,9 @@ public class RuleEntity {
     @Column(name = "conditions", nullable = false)
     private String conditions;
 
-    //@Column(name = "result")
-    //@Convert(converter = HashMapConverter.class)
-    //private Map<String, Object> result;
+    @Column(name = "result")
+    @Convert(converter = HashMapConverter.class)
+    private Map<String, Object> result;
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
@@ -73,6 +74,14 @@ public class RuleEntity {
 
     public void setConditions(String conditions) {
         this.conditions = conditions;
+    }
+
+    public Map<String, Object> getResult(){
+        return result;
+    }
+
+    public void setResult(Map<String, Object> result){
+        this.result = result;
     }
 
     public String getName() {

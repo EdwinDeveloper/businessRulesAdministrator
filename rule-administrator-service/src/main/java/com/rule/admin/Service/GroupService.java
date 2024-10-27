@@ -1,6 +1,7 @@
 package com.rule.admin.Service;
 
 import com.rule.admin.Entity.GroupEntity;
+import com.rule.admin.Entity.RuleEntity;
 import com.rule.admin.Exception.RAException;
 import com.rule.admin.Repository.GroupRepository;
 import com.rule.admin.Repository.RuleRepository;
@@ -46,10 +47,16 @@ public class GroupService {
     }
 
     @Transactional
-    public Group createOrUpdateGroup(String user, Group group){
+    public Group UpdateGroup(Group group){
+        Optional<GroupEntity> groupEntity = groupRepository.findById(group.getId());
+        if(groupEntity.isEmpty()){
+            throw new RAException(HttpStatus.BAD_REQUEST, "400", "GROUP DOESN'T EXIST");
+        }
+
         try{
             group.getRules().forEach(rule -> {
-                ruleRepository.save(Mapper.EntityFromRule(rule));
+                Optional<RuleEntity> ruleToUpdate = ruleRepository.findById(rule.getId());
+                ruleToUpdate.ifPresent(ruleEntity -> ruleRepository.save(Mapper.EntityFromRuleAndEntity(rule, ruleEntity)));
             });
             return Mapper.GroupFromEntity(groupRepository.save(Mapper.EntityFromGroup(group)));
         }catch (Exception e){
@@ -59,15 +66,14 @@ public class GroupService {
     }
 
     @Transactional
-    public Group updateGroupById(Group group){
-        Optional<GroupEntity> groupEntity = groupRepository.findById(group.getId());
+    public Group CreateGroup(Group group){
+        Optional<GroupEntity> groupEntity = groupRepository.findByGroupName(group.getGroupName());
         if(groupEntity.isPresent()){
-            group.getRules().forEach(rule -> {
-                ruleRepository.save(Mapper.EntityFromRule(rule));
-            });
-            return Mapper.GroupFromEntity(groupRepository.save(Mapper.EntityFromGroup(group)));
-        }else{
-            throw new RAException(HttpStatus.BAD_REQUEST, "400", "GROUP DOESN'T EXIST");
+            throw new RAException(HttpStatus.BAD_REQUEST, "400", "GROUP ALREADY EXIST");
         }
+        group.getRules().forEach(rule -> {
+            ruleRepository.save(Mapper.EntityFromRule(rule));
+        });
+        return Mapper.GroupFromEntity(groupRepository.save(Mapper.EntityFromGroup(group)));
     }
 }

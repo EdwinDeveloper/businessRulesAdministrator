@@ -16,6 +16,7 @@ data class Rules(
     val userId:UUID,
     val name: String,
     val conditions: String,
+    val result: Map<String, Any>,
     val priority: Int,
     val nextTrue: String? = null,
     val nextFalse: String? = null

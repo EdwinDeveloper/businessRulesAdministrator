@@ -41,16 +41,16 @@ public class GroupController {
         return new ResponseEntity<>(groupService.findGroupById(idGroup), HttpStatus.OK) ;
     }
 
-    @PostMapping("/{user}")
-    public ResponseEntity<Group> createGroup(@PathVariable String user, @RequestBody Group group){
-        logger.info("--RULE-ADMIN-SERVICE CREATE GROUP --user [{}]", user);
-        return new ResponseEntity<>(groupService.createOrUpdateGroup(user, group), HttpStatus.CREATED) ;
+    @PutMapping("/update")
+    public ResponseEntity<Group> createGroup(@RequestBody Group group){
+        logger.info("--RULE-ADMIN-SERVICE UPDATE GROUP --group [{}] : ", group.getGroupName());
+        return new ResponseEntity<>(groupService.UpdateGroup(group), HttpStatus.OK) ;
     }
 
-    @PutMapping("/update")
+    @PostMapping("/create")
     public ResponseEntity<Group> updateGroupRules(@RequestBody Group group){
-        logger.info("--RULE-ADMIN-SERVICE UPDATE GROUP RULES --group [{}]", group.getGroupName());
-        return new ResponseEntity<>(groupService.updateGroupById(group), HttpStatus.NO_CONTENT);
+        logger.info("--RULE-ADMIN-SERVICE CREATE GROUP RULES --group [{}] : ", group.getGroupName());
+        return new ResponseEntity<>(groupService.CreateGroup(group), HttpStatus.CREATED);
     }
 
 }

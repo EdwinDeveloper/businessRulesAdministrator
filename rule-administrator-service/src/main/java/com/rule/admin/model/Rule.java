@@ -4,6 +4,8 @@ import com.rule.admin.Entity.GroupEntity;
 import com.rule.admin.Entity.RuleEntity;
 
 import java.sql.Timestamp;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,6 +14,8 @@ public class Rule {
     private UUID id;
     private UUID userId;
     private String conditions;
+
+    private Map<String, Object> result;
     private String name;
     private String priority;
     private String nextTrue;
@@ -39,6 +43,14 @@ public class Rule {
     }
     public void setConditions(String conditions) {
         this.conditions = conditions;
+    }
+
+    public Map<String, Object> getResult(){
+        return result;
+    }
+
+    public void setResult(Map<String, Object> result){
+        this.result = result;
     }
     public String getName() {
         return name;
