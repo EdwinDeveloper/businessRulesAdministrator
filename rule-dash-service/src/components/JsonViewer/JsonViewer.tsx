@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState, ChangeEvent, useEffect } from 'react';
 import './JsonViewer.css';
 import '../general.css'
 import { RequestEvaluator } from '../../models/Elements';
@@ -19,6 +19,8 @@ export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData }) => {
         2
     ));
     const [error, setError] = useState<string | null>(null);
+    const [jsonViewer, setJsonViewer] = useState('jsonViewer')
+    const [jsonResponse, setJsonResponse] = useState<Map<string, unknown>>(new Map());
 
     const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newText = e.target.value;
@@ -38,9 +40,20 @@ export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData }) => {
     const RunEvaluation = async(jsonData: RequestEvaluator | undefined | null) => {
         if(jsonData !== undefined && jsonData !== null){
             const resultRules = await runEvaluationApi(jsonData);
-            console.log(resultRules.data)
+            if(resultRules.status == 200){
+                setJsonViewer('jsonViewerOk')
+                setJsonResponse(resultRules.data)
+                console.log("resultRules : ", resultRules.data)
+                setTimeout(() => {
+                    setJsonViewer('jsonViewer')
+                }, 1000);
+            }
         }
     }
+
+    useEffect(()=>{
+
+    }, [])
 
     return (
         <div className="container">
@@ -50,11 +63,18 @@ export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData }) => {
                 onChange={handleTextChange}
             />
             {error && <p className="error">{error}</p>}
-            <div className="jsonViewer">
-                <pre>{JSON.stringify(jsonData, null, 2)}</pre>
-            </div>
+            { jsonViewer === 'jsonViewer' ? (
+                <div className="jsonViewer">
+                    <pre>{JSON.stringify(jsonData, null, 2)}</pre>
+                </div>
+                    ) : (
+                    <div className="jsonViewerOk">
+                        <pre>{JSON.stringify(jsonResponse, null, 2)}</pre>
+                    </div>
+            )}
             <div>
                 <button disabled={error!=null} onClick={()=>RunEvaluation(jsonData)} className="general-button">Execute</button>
+                {/* <button disabled={error!=null} onClick={()=>RunEvaluation(jsonData)} className="general-button">Execute</button> */}
             </div>
         </div>
     );

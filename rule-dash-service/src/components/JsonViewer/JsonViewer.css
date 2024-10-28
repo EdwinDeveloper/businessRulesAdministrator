@@ -21,6 +21,21 @@
     border-radius: 5px;
     color: #61dafb;
     overflow: auto;
+    width: 550px;
+    height: 200px;
+}
+
+.jsonViewerOk {
+    background-color: #28aa4b;
+    padding: 1em;
+    border-radius: 5px;
+    color: #003901;
+    overflow: auto;
+    border-color: rgb(61, 255, 61);
+    border-style: solid;
+    border-width: 1px;
+    width: 550px;
+    height: 200px;
 }
 
 .error {

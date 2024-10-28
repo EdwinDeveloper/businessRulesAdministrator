@@ -14,6 +14,7 @@ class LinealEngine: CoreEngine<Map<String, Any>, Map<String, Any>>() {
     ): Map<String, Any> {
         var response: MutableMap<String, Any> = mutableMapOf()
         response.put("success", true)
+        response.put("real", true)
         return response
     }
 }
