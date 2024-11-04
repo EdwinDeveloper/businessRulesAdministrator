@@ -20,7 +20,7 @@ To run the proyect we should open each proyect and running in our ide environmen
 
 PRODUCTION
 
-FURUTE IMPLEMENTATION:
+FUTURE IMPLEMENTATION:
 
 execute "docker-compose run --build" to create our docker pods to run our infrastructure
 
