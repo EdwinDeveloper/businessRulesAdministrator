@@ -39,7 +39,7 @@ const GroupDetails: React.FC<GroupDetailsProps> = ({ run, setRun, group, rules, 
 
     useEffect(()=>{
         setSampleJson(requestGenerator())
-    },[])
+    }, [])
 
     return (
         <div>
@@ -55,7 +55,7 @@ const GroupDetails: React.FC<GroupDetailsProps> = ({ run, setRun, group, rules, 
                     handleUpdateGroup={onUpdateGroup}
                     handleNotSelectedGroup={onDeselectGroup}
                     setRun={setRun}
-                />): <JsonViewer initialJsonData={sampleJson}/>
+                />): <JsonViewer setRun={setRun} initialJsonData={sampleJson}/>
             ) : (
                 <div>
                     <p>No rules found for this group</p>

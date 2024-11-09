@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import './RuleCardList.css'
 import '../general.css'
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -27,8 +27,10 @@ export const RuleCardListComponent: FC<RuleCardListProps> = ( { setRun, rules, s
     setRules(prioritizedRules);
   };
 
-  const runGroup = () => {
+  const [selectedId, setSelectedId] = useState('');
 
+  const handleSelectRule = (idRule: string) => {
+    idRule === selectedId ? setSelectedId('') : setSelectedId(idRule)
   }
   
 
@@ -40,14 +42,21 @@ export const RuleCardListComponent: FC<RuleCardListProps> = ( { setRun, rules, s
             <div>
               {
                 rules.map((rule, index) => (
-                  <RuleCardComponent key={rule.id} rule={rule} index={index} moveRule={moveRule} />
+                  <RuleCardComponent
+                    key={rule.id}
+                    rule={rule}
+                    index={index}
+                    moveRule={moveRule}
+                    isSelected={selectedId === rule.id}
+                    onSelect={()=>handleSelectRule(rule.id)}
+                  />
                 ))
               }
             </div>
             <div className='button-container'>
               <button onClick={() => setRun(true)} className="general-button">Run</button>
               <button onClick={() => handleNotSelectedGroup()} className="general-button">Back</button>
-              <button onClick={() => handleUpdateGroup()} className="general-button">Update</button>
+              <button onClick={() => handleUpdateGroup()} className="general-button" disabled={ selectedId !== '' }>Update</button>
             </div>
           </div>
         ) : (

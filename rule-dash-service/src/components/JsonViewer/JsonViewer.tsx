@@ -6,9 +6,10 @@ import { runEvaluationApi } from '../../config/serivceImpl';
 
 interface JsonViewerProps {
     initialJsonData: RequestEvaluator | undefined;
+    setRun: (run: boolean)=>void
 }
 
-export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData }) => {
+export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData, setRun }) => {
     const [jsonData, setJsonData] = useState<RequestEvaluator | null | undefined>(initialJsonData);
     const [textData, setTextData] = useState(JSON.stringify(
         {
@@ -40,13 +41,17 @@ export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData }) => {
     const RunEvaluation = async(jsonData: RequestEvaluator | undefined | null) => {
         if(jsonData !== undefined && jsonData !== null){
             const resultRules = await runEvaluationApi(jsonData);
-            if(resultRules.status == 200){
+            console.log("response : ", resultRules);
+            
+            if(resultRules.status === 200 && resultRules.status !== undefined){
                 setJsonViewer('jsonViewerOk')
                 setJsonResponse(resultRules.data)
                 console.log("resultRules : ", resultRules.data)
                 setTimeout(() => {
                     setJsonViewer('jsonViewer')
                 }, 1000);
+            }else if(resultRules.status === undefined){
+                alert("Error, server not available")
             }
         }
     }
@@ -72,9 +77,9 @@ export const JsonViewer: FC<JsonViewerProps> = ({ initialJsonData }) => {
                         <pre>{JSON.stringify(jsonResponse, null, 2)}</pre>
                     </div>
             )}
-            <div>
-                <button disabled={error!=null} onClick={()=>RunEvaluation(jsonData)} className="general-button">Execute</button>
-                {/* <button disabled={error!=null} onClick={()=>RunEvaluation(jsonData)} className="general-button">Execute</button> */}
+            <div className='button-container'>
+                <button disabled={error!=null} onClick={()=>setRun(false)} className="general-button">Back</button>
+                <button disabled={error!=null} onClick={()=>RunEvaluation(jsonData)} className="general-button">Execute</button> 
             </div>
         </div>
     );
