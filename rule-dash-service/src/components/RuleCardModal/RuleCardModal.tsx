@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent } from 'react'
+import React, { FC, useState, ChangeEvent, useEffect } from 'react'
 import { Rule } from '../../models/Elements';
 import { Dropdown } from '../Dropdown/Dropdown';
 
@@ -13,27 +13,41 @@ interface RuleCardModalProps{
 
 export const RuleCardModal: FC<RuleCardModalProps> = ( { rule, onUpdate, setOpenModal } ) => {
 
-    const [formData, setFormData] = useState({
-        name: rule.name,
-        priority: rule.priority,
-        conditions: rule.conditions,
-        nextTrue: rule.nextTrue || '',
-        nextFalse: rule.nextFalse || ''
-      });
+    const [formData, setFormData] = useState('');
 
-      const [operationSelected, setOperationSelected] = useState('')
+    const [operationSelected, setOperationSelected] = useState('')
+    const [scriptCondition, setScriptCondition] = useState('')
 
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    }
+    const [name, setName] = useState('')
+    const [paramName, setParamName] = useState('')
+    const [paramValue, setParamValue] = useState('')
 
     type Operation = '<' | '<=' | '==' | '>' | '>=';
 
     const handleOperation = (event: ChangeEvent<HTMLSelectElement>) => {
         const so = event.target.value as Operation;
         setOperationSelected(so)
-      };
+    };
+
+    useEffect(()=>{
+        setScriptCondition(rule.conditions)
+        setName(rule.name)
+    }, [])
+
+    const handleExtendScriptCondition = (operation: string) => {
+        if(!(scriptCondition.endsWith('&') || scriptCondition.endsWith('|'))){
+            setScriptCondition(scriptCondition + " " + operation )
+        }
+    }
+
+    const handleAddScriptCondition = () => {
+        if(scriptCondition.endsWith('&') || scriptCondition.endsWith('|')){
+            setScriptCondition( scriptCondition + " " + paramName + operationSelected + paramValue )
+            setParamName('')
+            setParamValue('')
+            setOperationSelected('')
+        }
+    }
 
     return (
         <div className="modal-overlay">
@@ -46,25 +60,44 @@ export const RuleCardModal: FC<RuleCardModalProps> = ( { rule, onUpdate, setOpen
                         className='general-input'
                         type="text"
                         name="name"
-                        value={formData.name}
-                        onChange={handleChange}
+                        value={name}
+                        onChange={(event: ChangeEvent<HTMLInputElement>)=>{ setName(event.target.value)  }}
                         />
                     </div>
 
                     <div>
                         <label>Conditions:</label>
                         <div className='select-container'>
-                            <input
-                                className='general-input-small'
-                                type="text"
+                            <textarea
+                                className='general-input'
                                 name="name"
+                                disabled
+                                value={scriptCondition}
                             />
-                            <Dropdown handleOperation={handleOperation} operationSelected={operationSelected}/>
-                            <input
-                                className='general-input-small'
-                                type="text"
-                                name="name"
-                            />
+                            <div className='button-container'>
+                                <button className="general-button-small" onClick={()=>handleExtendScriptCondition('&')}>and</button>
+                                <button className="general-button-small" onClick={()=>handleExtendScriptCondition('|')}>or</button>
+                            </div>
+                            <div>
+                                <input
+                                    className='general-input-small'
+                                    type="text"
+                                    name="paramName"
+                                    onChange={(event: ChangeEvent<HTMLInputElement>)=>{ setParamName(event.target.value)  }}
+                                    value={paramName}
+                                />
+                                <Dropdown handleOperation={handleOperation} operationSelected={operationSelected}/>
+                                <input
+                                    className='general-input-small'
+                                    type="text"
+                                    name="paramValue"
+                                    onChange={(event: ChangeEvent<HTMLInputElement>)=>{ setParamValue(event.target.value)  }}
+                                    value={paramValue}
+                                />
+                            </div>
+                            <div className='button-container'>
+                                <button className="general-button-small" onClick={()=>handleAddScriptCondition()}>add</button>
+                            </div>
                         </div>
                     </div>
 
