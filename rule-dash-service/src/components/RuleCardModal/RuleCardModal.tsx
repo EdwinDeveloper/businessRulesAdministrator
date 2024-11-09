@@ -35,13 +35,18 @@ export const RuleCardModal: FC<RuleCardModalProps> = ( { rule, onUpdate, setOpen
     }, [])
 
     const handleExtendScriptCondition = (operation: string) => {
-        if(!(scriptCondition.endsWith('&') || scriptCondition.endsWith('|'))){
+        if(!(scriptCondition.endsWith('&') || scriptCondition.endsWith('|'))  && !scriptCondition.endsWith(" ")){
             setScriptCondition(scriptCondition + " " + operation )
+        }else if(scriptCondition.endsWith('&')){
+            setScriptCondition(scriptCondition.replace(' &', ''))
+        }else if(scriptCondition.endsWith('|')){
+            setScriptCondition(scriptCondition.replace(' |', ''))
         }
     }
 
     const handleAddScriptCondition = () => {
-        if(scriptCondition.endsWith('&') || scriptCondition.endsWith('|')){
+        
+        if((scriptCondition.endsWith('&') || scriptCondition.endsWith('|')) && (paramName!=='' && paramValue!=='')){
             setScriptCondition( scriptCondition + " " + paramName + operationSelected + paramValue )
             setParamName('')
             setParamValue('')
