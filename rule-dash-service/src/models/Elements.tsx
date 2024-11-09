@@ -21,6 +21,7 @@ export interface Rule {
     id: string;
     userId: string;
     conditions: string;
+    result: Record<string,any>
     name: string;
     priority: string;
     nextTrue: string;

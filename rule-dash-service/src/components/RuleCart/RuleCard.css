@@ -1,5 +1,6 @@
 .rule-card{
     width: 95%;
+    height: 40px;
     justify-content: center;
     align-content: center;
     align-items: center;
@@ -12,4 +13,23 @@
     display: flex;
     flex-direction: row;
     gap: 24px;
+}
+
+.rule-card-selected{
+    width: 95%;
+    height: 40px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 16px;
+    margin: 12px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    cursor: move;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    background-color: #f6fcff;
+    border: 2px solid rgb(18, 18, 144);
 }
