@@ -54,7 +54,7 @@ export const RuleCardListComponent: FC<RuleCardListProps> = ( { setRun, rules, s
               }
             </div>
             <div className='button-container'>
-              <button onClick={() => setRun(true)} className="general-button">Run</button>
+              <button onClick={() => setRun(true)} className="general-button" disabled={ selectedId !== '' }>Run</button>
               <button onClick={() => handleNotSelectedGroup()} className="general-button">Back</button>
               <button onClick={() => handleUpdateGroup()} className="general-button" disabled={ selectedId !== '' }>Update</button>
             </div>

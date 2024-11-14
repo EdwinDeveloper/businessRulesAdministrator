@@ -52,6 +52,33 @@
     opacity: 0.6;
 }
 
+.general-button-medium{
+    width: 70px;
+    height: 30px;
+    background-color: #60a5fa;
+    color: white;
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+.general-button-medium:hover {
+    background-color: #3b82f6;
+}
+
+.general-button-medium:active{
+    background-color: #306ed2;
+}
+
+.general-button-medium:disabled{
+    background-color: #9bc6fa;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
 .general-button-delete{
     width: 80px;
     height: 50px;

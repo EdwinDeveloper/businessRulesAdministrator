@@ -13,8 +13,6 @@ interface RuleCardModalProps{
 
 export const RuleCardModal: FC<RuleCardModalProps> = ( { rule, onUpdate, setOpenModal } ) => {
 
-    const [formData, setFormData] = useState('');
-
     const [operationSelected, setOperationSelected] = useState('')
     const [scriptCondition, setScriptCondition] = useState('')
 

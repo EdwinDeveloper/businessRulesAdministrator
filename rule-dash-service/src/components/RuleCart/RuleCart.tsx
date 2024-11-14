@@ -1,8 +1,10 @@
 import { FC, useState } from 'react';
 import './RuleCard.css'
+import '../general.css'
 import { Rule } from '../../models/Elements';
 import { useDrag, useDrop } from 'react-dnd';
 import { RuleCardModal } from '../RuleCardModal/RuleCardModal';
+import { ResultRuleModal } from '../ResultRuleModal/ResultRuleModal';
 
 interface RuleCard{
   rule: Rule,
@@ -62,10 +64,15 @@ export const RuleCardComponent: FC<RuleCard> = ({ rule, index, isSelected = fals
               Next False: {rule.nextFalse ? rule.nextFalse : 'None'}
             </div>
         </div>
-        
-
+        { isSelected &&
+            <div className='button-container'>
+              <button className="general-button-medium">Conditions</button>
+              <button className="general-button-medium">Results</button>
+            </div>
+        }
         { isSelected && openModal &&
-          <RuleCardModal rule={rule} onUpdate={()=>{}} setOpenModal={setOpenModal}/>
+          <ResultRuleModal/>
+          // <RuleCardModal rule={rule} onUpdate={()=>{}} setOpenModal={setOpenModal}/>
         }
       </div>
     );
